@@ -1,14 +1,19 @@
 {
+  "id": "/",
   "name": "FitLog",
   "short_name": "FitLog",
+  "lang": "zh-CN",
+  "dir": "ltr",
   "description": "记录训练计划、动作、组数、重量和历史趋势",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
   "orientation": "portrait",
   "background_color": "#0B0F14",
   "theme_color": "#0B0F14",
   "categories": ["fitness", "health", "sports", "productivity"],
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "/fitlog-icon-192.png",
@@ -27,6 +32,34 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "开始训练",
+      "short_name": "训练",
+      "description": "快速打开 FitLog 训练记录页",
+      "url": "/workout/new",
+      "icons": [
+        {
+          "src": "/fitlog-icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "查看历史",
+      "short_name": "历史",
+      "description": "快速查看 FitLog 历史训练记录",
+      "url": "/history",
+      "icons": [
+        {
+          "src": "/fitlog-icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     }
   ]
 }

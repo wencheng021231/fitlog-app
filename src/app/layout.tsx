@@ -12,6 +12,9 @@ export const metadata: Metadata = {
     title: "FitLog",
     statusBarStyle: "black-translucent",
   },
+  other: {
+    "apple-mobile-web-app-capable": "yes",
+  },
   icons: {
     icon: [
       { url: "/fitlog-icon-192.png", sizes: "192x192", type: "image/png" },
@@ -27,6 +30,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
+  interactiveWidget: "resizes-content",
   themeColor: "#0B0F14",
   colorScheme: "dark",
 };

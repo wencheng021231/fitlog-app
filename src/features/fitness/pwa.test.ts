@@ -7,18 +7,25 @@ describe("PWA metadata", () => {
     const manifest = JSON.parse(
       readFileSync("src/app/manifest.json", "utf8"),
     ) as {
+      id: string;
       name: string;
       short_name: string;
+      lang: string;
       display: string;
+      display_override: string[];
       start_url: string;
       background_color: string;
       theme_color: string;
       icons: Array<{ src: string; sizes: string; type: string }>;
+      shortcuts: Array<{ name: string; url: string }>;
     };
 
+    assert.equal(manifest.id, "/");
     assert.equal(manifest.name, "FitLog");
     assert.equal(manifest.short_name, "FitLog");
+    assert.equal(manifest.lang, "zh-CN");
     assert.equal(manifest.display, "standalone");
+    assert.deepEqual(manifest.display_override, ["standalone", "minimal-ui"]);
     assert.equal(manifest.start_url, "/");
     assert.equal(manifest.background_color, "#0B0F14");
     assert.equal(manifest.theme_color, "#0B0F14");
@@ -30,6 +37,21 @@ describe("PWA metadata", () => {
         "/fitlog-icon-512.png:512x512:image/png",
       ],
     );
+    assert.deepEqual(
+      manifest.shortcuts.map((shortcut) => `${shortcut.name}:${shortcut.url}`),
+      ["开始训练:/workout/new", "查看历史:/history"],
+    );
+  });
+
+  it("defines iPhone and Android install metadata in the root layout", () => {
+    const layout = readFileSync("src/app/layout.tsx", "utf8");
+
+    assert.match(layout, /appleWebApp/);
+    assert.match(layout, /apple-mobile-web-app-capable/);
+    assert.match(layout, /title:\s*"FitLog"/);
+    assert.match(layout, /statusBarStyle:\s*"black-translucent"/);
+    assert.match(layout, /viewportFit:\s*"cover"/);
+    assert.match(layout, /interactiveWidget:\s*"resizes-content"/);
   });
 
   it("ships mobile home screen icons with expected dimensions", () => {
